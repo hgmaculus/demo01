@@ -37,7 +37,7 @@ public class JDialogModal extends javax.swing.JDialog implements AutoCloseable {
 
     @Override
     public void close() throws Exception {
-        logger.info("JDialogModal AutoClose");
+        //logger.info("JDialogModal AutoClose");
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
