@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 */
 public class Test_h2 {
     public static void main(String[] args) {
+       long startTime = System.currentTimeMillis();
         try (Connection conn = DriverManager.getConnection("jdbc:h2:mem:test")) {
                 Statement stmt = conn.createStatement();
                 stmt.execute("create table cities (id integer, name varchar(50))");
@@ -26,5 +27,7 @@ public class Test_h2 {
         catch (SQLException ex) {
             Logger.getLogger(Test_h2.class.getName()).log(Level.SEVERE, null, ex);
         }
+        long endTime = System.currentTimeMillis();
+       System.out.println("Total execution time: " + (endTime-startTime) + "ms");
     }
 }
