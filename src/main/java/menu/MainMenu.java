@@ -26,6 +26,11 @@ public class MainMenu extends javax.swing.JFrame {
         setTitle("Gnuino Demo");
 
         buttonVentas.setText("Ventas");
+        buttonVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonVentasActionPerformed(evt);
+            }
+        });
 
         buttonCredits.setText("Credits");
         buttonCredits.addActionListener(new java.awt.event.ActionListener() {
@@ -83,6 +88,10 @@ public class MainMenu extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_buttonClientesActionPerformed
+
+    private void buttonVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVentasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonVentasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonClientes;
