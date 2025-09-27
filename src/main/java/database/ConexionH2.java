@@ -1,6 +1,6 @@
 /* Author : H. Gabriel Máculus */
-
 package database;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,8 +10,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ConexionH2 implements AutoCloseable {
-        private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ConexionH2.class.getName());
+
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ConexionH2.class.getName());
     private Connection conn;
+
     //private ResultSet rs;
     public ConexionH2() {
         try {
@@ -20,6 +22,7 @@ public class ConexionH2 implements AutoCloseable {
             Logger.getLogger(Test_h2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public int initDB() {
         int ret = 0;
         try (Statement stmt = conn.createStatement()) {
@@ -29,9 +32,9 @@ public class ConexionH2 implements AutoCloseable {
         }
         return ret;
     }
-    
+
     public int seedDB() {
-        int ret=0;
+        int ret = 0;
         try (Statement stmt = conn.createStatement()) {
             // insert multiples values
             ret = stmt.executeUpdate("insert into cities (id, name) values "
@@ -46,16 +49,15 @@ public class ConexionH2 implements AutoCloseable {
         }
         return ret;
     }
-    
+
     public void readDB() {
         try {
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery("select * from cities;");
-                while(rs.next()) {
-                    System.out.println("id: " + rs.getString("id") + " name: " + rs.getString("name"));
-                }
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from cities;");
+            while (rs.next()) {
+                System.out.println("id: " + rs.getString("id") + " name: " + rs.getString("name"));
             }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(Test_h2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -63,7 +65,7 @@ public class ConexionH2 implements AutoCloseable {
     @Override
     public void close() throws Exception {
         logger.info("Conexion H2 Close()");
-        
+
     }
-    
+
 }

@@ -27,6 +27,8 @@ public class Test_h2 {
             stmt.executeUpdate("insert into cities (id, name) values (1, \'General Alvear\');");
             stmt.executeUpdate("insert into cities (id, name) values (2, \'Real del Padre\');");
             stmt.executeUpdate("insert into cities (id, name) values (3, \'Villa Atuel\');");
+            stmt.executeUpdate("insert into cities (id, name) values (4, \'Atuel Norte\');");
+            stmt.executeUpdate("insert into cities (id, name) values (5, \'San Pedro del Atuel \');");
             conn.commit();
             
             endTime = System.currentTimeMillis();
