@@ -1,5 +1,7 @@
 package menu;
 
+import ventas.FrameVentas;
+
 public class MainMenu extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainMenu.class.getName());
@@ -90,7 +92,10 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonClientesActionPerformed
 
     private void buttonVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVentasActionPerformed
-        // TODO add your handling code here:
+        try(FrameVentas fventas = new FrameVentas(this, true)) {
+            fventas.setVisible(true);
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_buttonVentasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

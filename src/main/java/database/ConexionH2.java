@@ -65,7 +65,6 @@ public class ConexionH2 implements AutoCloseable {
     @Override
     public void close() throws Exception {
         logger.info("Conexion H2 Close()");
-
     }
 
 }
