@@ -18,8 +18,12 @@ public class Test_h2 {
         long endTime;
         try (Connection conn = DriverManager.getConnection("jdbc:h2:mem:test")) {
             Statement stmt = conn.createStatement();
-            stmt.execute("create table cities (id integer, name varchar(50))");
-            
+            boolean ret = stmt.execute("create table cities (id integer, name varchar(50))");
+            conn.commit();
+            if(ret) System.out.println("execute failed");
+            ret = stmt.execute("create table clientes (id integer, nombre varchar(50), apellido varchar(50), telefono varchar(30), email varchar(40))");
+            if(ret) System.out.println("execute failed");
+            conn.commit();
             endTime = System.currentTimeMillis();
             System.out.println("Total execution time(create table): " + (endTime - startTime) + "ms");
             startTime = System.currentTimeMillis();
@@ -33,6 +37,13 @@ public class Test_h2 {
             
             endTime = System.currentTimeMillis();
             System.out.println("Total execution time(insert into table): " + (endTime - startTime) + "ms");
+            /*
+            stmt.executeUpdate("insert into clientes (id, nombre, apellido, telefono, email) values "
+                    + "(1, \'Gabriel\', \'Maculus\', \'2625525130\', \'gabrielmaculus@gmail.com\'), "
+                    + "(2, \'Luis\', \'Garcia\', \'2625551122\', \'luisgarcia@gmail.com\'), "
+                    + "");*/
+            stmt.executeUpdate("insert into clientes (id, nombre, apellido, telefono, email) values (1, \'Gabriel\', \'Maculus\', \'2625525130\', \'gabrielmaculus@gmail.com\');");
+            conn.commit();
             startTime = System.currentTimeMillis();
 
             ResultSet rs = stmt.executeQuery("select * from cities;");
@@ -42,9 +53,26 @@ public class Test_h2 {
             while (rs.next()) {
                 System.out.println("id: " + rs.getString("id") + " name: " + rs.getString("name"));
             }
+            
+            /* finish get cities */
+ 
+            rs = stmt.executeQuery("select * from clientes;");
+            while (rs.next()) {
+                System.out.println("id: " + rs.getString("id") 
+                        + " nombre: " + rs.getString("nombre")
+                        + " apellido: " + rs.getString("apellido")
+                        + " telefono: " + rs.getString("telefono")
+                        + " email: " + rs.getString("email")
+                );
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Test_h2.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
+        
+            
+        
         
     }
 }

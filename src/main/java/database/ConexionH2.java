@@ -30,6 +30,11 @@ public class ConexionH2 implements AutoCloseable {
             conn.commit();
         } catch (SQLException e) {
         }
+        try (Statement stmt = conn.createStatement()) {
+            ret = stmt.executeUpdate("create table clientes (id integer, nombre varchar(50), apellido varchar(50), telefono varchar(30), email varchar(40))");
+            conn.commit();
+        } catch (SQLException e) {
+        }
         return ret;
     }
 
@@ -44,6 +49,17 @@ public class ConexionH2 implements AutoCloseable {
                     + "");
             System.out.println("com.gnuino.h2_dbtest01.ConexionH2.seedDB(): executeUpdate: " + ret);
             //stmt.executeUpdate("insert into cities (id, name) values (2, \'Real del Pobre\'); ");
+            conn.commit();
+        } catch (SQLException e) {
+        }
+        try (Statement stmt = conn.createStatement()) {
+            // insert multiples values
+            ret = stmt.executeUpdate("insert into clientes (id, nombre, apellido, telefono, email) values "
+                    + "(1, \'Gabriel\'), \'Maculus\'), \'2625525130\'), \'gabrielmaculus@gmail.com\'), "
+                    + "(2, \'Luis\'), \'Garcia\'), \'2625551122\'), \'luisgarcia@gmail.com\'), "
+                    + "");
+            System.out.println("ConexionH2.seedDB(clientes): executeUpdate: " + ret);
+            
             conn.commit();
         } catch (SQLException e) {
         }
