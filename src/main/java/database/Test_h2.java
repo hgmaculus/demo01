@@ -42,7 +42,10 @@ public class Test_h2 {
                     + "(1, \'Gabriel\', \'Maculus\', \'2625525130\', \'gabrielmaculus@gmail.com\'), "
                     + "(2, \'Luis\', \'Garcia\', \'2625551122\', \'luisgarcia@gmail.com\'), "
                     + "");*/
-            stmt.executeUpdate("insert into clientes (id, nombre, apellido, telefono, email) values (1, \'Gabriel\', \'Maculus\', \'2625525130\', \'gabrielmaculus@gmail.com\');");
+            stmt.executeUpdate(
+                    "insert into clientes (id, nombre, apellido, telefono, email) "
+                            + "values "
+                            + "(1, \'Gabriel\', \'Maculus\', \'2625525130\', \'gabrielmaculus@gmail.com\');");
             conn.commit();
             startTime = System.currentTimeMillis();
 
@@ -68,11 +71,5 @@ public class Test_h2 {
         } catch (SQLException ex) {
             Logger.getLogger(Test_h2.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
-            
-        
-        
     }
 }

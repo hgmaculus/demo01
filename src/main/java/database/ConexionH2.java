@@ -35,6 +35,11 @@ public class ConexionH2 implements AutoCloseable {
             conn.commit();
         } catch (SQLException e) {
         }
+        try (Statement stmt = conn.createStatement()) {
+            ret = stmt.executeUpdate("create table usuarios (id integer, nombre varchar(50), clave varchar(50), nivel integer)");
+            conn.commit();
+        } catch (SQLException e) {
+        }
         return ret;
     }
 
@@ -52,11 +57,24 @@ public class ConexionH2 implements AutoCloseable {
             conn.commit();
         } catch (SQLException e) {
         }
+        // Seed Clientes
         try (Statement stmt = conn.createStatement()) {
             // insert multiples values
             ret = stmt.executeUpdate("insert into clientes (id, nombre, apellido, telefono, email) values "
-                    + "(1, \'Gabriel\'), \'Maculus\'), \'2625525130\'), \'gabrielmaculus@gmail.com\'), "
-                    + "(2, \'Luis\'), \'Garcia\'), \'2625551122\'), \'luisgarcia@gmail.com\'), "
+                    + "(1, \'Gabriel\', \'Maculus\', \'2625525130\', \'gabrielmaculus@gmail.com\'), "
+                    + "(2, \'Luis\', \'Garcia\', \'2625551122\', \'luisgarcia@gmail.com\'), "
+                    + "");
+            System.out.println("ConexionH2.seedDB(clientes): executeUpdate: " + ret);
+            
+            conn.commit();
+        } catch (SQLException e) {
+        }
+        // Seed Usuarios
+        try (Statement stmt = conn.createStatement()) {
+            // insert multiples values
+            ret = stmt.executeUpdate("insert into usuarios (id, nombre, clave, nivel) values "
+                    + "(1, \'gabriel\', \'ninguna\', 0)), "
+                    + "(2, \'luis\', \'ninguna\', 1), "
                     + "");
             System.out.println("ConexionH2.seedDB(clientes): executeUpdate: " + ret);
             
