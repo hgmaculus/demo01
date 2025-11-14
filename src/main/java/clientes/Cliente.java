@@ -8,17 +8,32 @@ public class Cliente {
     private String telefono;
     private String email;
 
-    public Cliente(int id, String nombre, String apellido, String telefono, String email) {
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Cliente{");
+        sb.append("id=").append(id);
+        sb.append(", nombre=").append(nombre);
+        sb.append(", apellido=").append(apellido);
+        sb.append(", telefono=").append(telefono);
+        sb.append(", email=").append(email);
+        sb.append(", cuit=").append(cuit);
+        sb.append(", razon_social=").append(razon_social);
+        sb.append(", direccion=").append(direccion);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    public Cliente(int id, String nombre, String apellido, String telefono, String email, String cuit, String razon_social, String direccion) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
         this.email = email;
-    }
-
-
-    public Cliente(int id, String nombre, String apellido, String telefono) {
-        this(id, nombre, apellido, telefono, null); // Llama al constructor principal con email = null
+        this.cuit = cuit;
+        this.razon_social = razon_social;
+        this.direccion = direccion;
     }
 
     public int getId() {
@@ -61,15 +76,27 @@ public class Cliente {
         this.email = email;
     }
 
-    // --- Método toString para una representación en texto del objeto ---
-    @Override
-    public String toString() {
-        return "Cliente{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", email='" + (email != null ? email : "N/A") + '\'' + // Muestra "N/A" si el email es null
-                '}';
+    public String getCuit() {
+        return cuit;
+    }
+
+    public void setCuit(String cuit) {
+        this.cuit = cuit;
+    }
+
+    public String getRazon_social() {
+        return razon_social;
+    }
+
+    public void setRazon_social(String razon_social) {
+        this.razon_social = razon_social;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 }
