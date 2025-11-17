@@ -1,13 +1,11 @@
 package clientes;
 
 public class Cliente {
-
     private int id;
     private String nombre;
     private String apellido;
     private String telefono;
     private String email;
-
 
     @Override
     public String toString() {

@@ -3,11 +3,14 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import clientes.Cliente;
+import clientes.Empresa;
 
 public class ConexionH2 implements AutoCloseable {
 
@@ -19,7 +22,7 @@ public class ConexionH2 implements AutoCloseable {
         try {
             conn = DriverManager.getConnection("jdbc:h2:mem:test");
         } catch (SQLException ex) {
-            Logger.getLogger(Test_h2.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, null, ex);
         }
     }
 
@@ -27,17 +30,17 @@ public class ConexionH2 implements AutoCloseable {
         int ret = 0;
         try (Statement stmt = conn.createStatement()) {
             ret = stmt.executeUpdate("create table cities (id integer, name varchar(50))");
-            conn.commit();
+            //conn.commit();
         } catch (SQLException e) {
         }
         try (Statement stmt = conn.createStatement()) {
             ret = stmt.executeUpdate("create table clientes (id integer, nombre varchar(50), apellido varchar(50), telefono varchar(30), email varchar(40))");
-            conn.commit();
+            System.out.println("database.ConexionH2.initDB() : Create table clientes");
         } catch (SQLException e) {
         }
         try (Statement stmt = conn.createStatement()) {
             ret = stmt.executeUpdate("create table usuarios (id integer, nombre varchar(50), clave varchar(50), nivel integer)");
-            conn.commit();
+            System.out.println("database.ConexionH2.initDB() : Create table usuarios");
         } catch (SQLException e) {
         }
         return ret;
@@ -52,7 +55,7 @@ public class ConexionH2 implements AutoCloseable {
                     + "(2, \'Real del Padre\'), "
                     + "(3, \'Villa Atuel\'); "
                     + "");
-            System.out.println("com.gnuino.h2_dbtest01.ConexionH2.seedDB(): executeUpdate: " + ret);
+            System.out.println("com.gnuino.h2_dbtest01.ConexionH2.seedDB(cities): executeUpdate: " + ret);
             //stmt.executeUpdate("insert into cities (id, name) values (2, \'Real del Pobre\'); ");
             conn.commit();
         } catch (SQLException e) {
@@ -61,25 +64,30 @@ public class ConexionH2 implements AutoCloseable {
         try (Statement stmt = conn.createStatement()) {
             // insert multiples values
             ret = stmt.executeUpdate("insert into clientes (id, nombre, apellido, telefono, email) values "
-                    + "(1, \'Gabriel\', \'Maculus\', \'2625525130\', \'gabrielmaculus@gmail.com\'), "
-                    + "(2, \'Luis\', \'Garcia\', \'2625551122\', \'luisgarcia@gmail.com\'), "
-                    + "");
-            System.out.println("ConexionH2.seedDB(clientes): executeUpdate: " + ret);
+                    + "(1, \'Gabriel\', \'Maculus\', \'2625525130\', \'gabrielmaculus@gmail.com\'); "
+                    );
+            System.out.println("ConexionH2.seedDB(clientes): executeUpdate: " + ret);  
+            ret = stmt.executeUpdate("insert into clientes (id, nombre, apellido, telefono, email) values "
+                    + "(1, \'Luis\', \'Gonzalez\', \'262533455\', \'ninguno@gmail.com\'); "
+                    );
+            System.out.println("ConexionH2.seedDB(clientes): executeUpdate: " + ret);  
             
-            conn.commit();
+            
         } catch (SQLException e) {
+            System.out.println("database.ConexionH2.seedDB() Exception: insert into clientes " + e.getMessage());
         }
         // Seed Usuarios
         try (Statement stmt = conn.createStatement()) {
             // insert multiples values
             ret = stmt.executeUpdate("insert into usuarios (id, nombre, clave, nivel) values "
-                    + "(1, \'gabriel\', \'ninguna\', 0)), "
-                    + "(2, \'luis\', \'ninguna\', 1), "
+                    + "(1, \'gabriel\', \'ninguna\', 0), "
+                    + "(2, \'luis\', \'ninguna\', 1); "
                     + "");
-            System.out.println("ConexionH2.seedDB(clientes): executeUpdate: " + ret);
+            System.out.println("ConexionH2.seedDB(usuarios): executeUpdate: " + ret);
             
             conn.commit();
         } catch (SQLException e) {
+            System.out.println("database.ConexionH2.seedDB() Exception: insert into usuarios");
         }
         return ret;
     }
@@ -91,14 +99,40 @@ public class ConexionH2 implements AutoCloseable {
             while (rs.next()) {
                 System.out.println("id: " + rs.getString("id") + " name: " + rs.getString("name"));
             }
+            
+            rs = stmt.executeQuery("select * from clientes;");
+            System.out.println("Lista Clientes");
+            while (rs.next()) {
+                System.out.println("id: " + rs.getString("id") + " name: " + rs.getString("nombre"));
+            }
+            rs = stmt.executeQuery("select * from usuarios;");
+            System.out.println("Lista usuarios");
+            while (rs.next()) {
+                System.out.println("id: " + rs.getString("id") + " name: " + rs.getString("nombre"));
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Test_h2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() throws InterruptedException {
         logger.info("Conexion H2 Close()");
     }
 
+    public int agregarCliente(Cliente nuevoCliente) {
+        int ret = 0;
+        try {
+            String query = "insert into clientes (nombre, apellido, telefono, email) values (?, ?, ?, ?);";
+            PreparedStatement pre = conn.prepareStatement(query);
+            pre.setString(1, nuevoCliente.getNombre());
+            pre.setString(2, nuevoCliente.getApellido());
+            pre.setString(3, nuevoCliente.getTelefono());
+            pre.setString(4, nuevoCliente.getEmail());
+            ret = pre.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Test_h2.class.getName()).log(Level.SEVERE, "agregarCliente", ex);
+        }
+        return ret;
+    }
 }
