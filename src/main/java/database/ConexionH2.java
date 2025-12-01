@@ -43,6 +43,11 @@ public class ConexionH2 implements AutoCloseable {
             System.out.println("database.ConexionH2.initDB() : Create table usuarios");
         } catch (SQLException e) {
         }
+        try (Statement stmt = conn.createStatement()) {
+            ret = stmt.executeUpdate("create table empresas (id integer, cuit varchar(20), razon_social varchar(50), nombre varchar(40))");
+            System.out.println("database.ConexionH2.initDB() : Create table empresas");
+        } catch (SQLException e) {
+        }
         return ret;
     }
 
@@ -62,7 +67,7 @@ public class ConexionH2 implements AutoCloseable {
         }
         // Seed Clientes
         try (Statement stmt = conn.createStatement()) {
-            // insert multiples values
+            // insert one value
             ret = stmt.executeUpdate("insert into clientes (id, nombre, apellido, telefono, email) values "
                     + "(1, \'Gabriel\', \'Maculus\', \'2625525130\', \'gabrielmaculus@gmail.com\'); "
                     );
@@ -81,20 +86,28 @@ public class ConexionH2 implements AutoCloseable {
             // insert multiples values
             ret = stmt.executeUpdate("insert into usuarios (id, nombre, clave, nivel) values "
                     + "(1, \'gabriel\', \'ninguna\', 0), "
-                    + "(2, \'luis\', \'ninguna\', 1); "
+                    + "(2, \'luis\', \'Garcia \', 1); "
                     + "");
             System.out.println("ConexionH2.seedDB(usuarios): executeUpdate: " + ret);
-            
-            conn.commit();
         } catch (SQLException e) {
             System.out.println("database.ConexionH2.seedDB() Exception: insert into usuarios");
+        }
+        // Seed Empresas
+        try (Statement stmt = conn.createStatement()) {
+            // insert multiples values
+            ret = stmt.executeUpdate("insert into empresas (id, cuit, razon_social, nombre) values "
+                    + "(1, \'20293339999\', \'Gnuino System\', \'Ningun nombre\'), "
+                    + "(2, \'290002227771\', \'ninguna\', \'Nombre empresa 2\'); "
+                    + "");
+            System.out.println("ConexionH2.seedDB(empresas): executeUpdate: " + ret);
+        } catch (SQLException e) {
+            System.out.println("database.ConexionH2.seedDB() Exception: insert into empresas");
         }
         return ret;
     }
 
     public void readDB() {
-        try {
-            Statement stmt = conn.createStatement();
+        try (Statement stmt = conn.createStatement()){
             ResultSet rs = stmt.executeQuery("select * from cities;");
             while (rs.next()) {
                 System.out.println("id: " + rs.getString("id") + " name: " + rs.getString("name"));
@@ -110,6 +123,11 @@ public class ConexionH2 implements AutoCloseable {
             while (rs.next()) {
                 System.out.println("id: " + rs.getString("id") + " name: " + rs.getString("nombre"));
             }
+            rs = stmt.executeQuery("select * from empresas;");
+            System.out.println("Lista Empresas");
+            while (rs.next()) {
+                System.out.println("id: " + rs.getString("cuit") + " name: " + rs.getString("nombre"));
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Test_h2.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -123,16 +141,32 @@ public class ConexionH2 implements AutoCloseable {
     public int agregarCliente(Cliente nuevoCliente) {
         int ret = 0;
         try {
-            String query = "insert into clientes (nombre, apellido, telefono, email) values (?, ?, ?, ?);";
+            String query = "insert into clientes (id, nombre, apellido, telefono, email) values (?, ?, ?, ?, ?);";
             PreparedStatement pre = conn.prepareStatement(query);
-            pre.setString(1, nuevoCliente.getNombre());
-            pre.setString(2, nuevoCliente.getApellido());
-            pre.setString(3, nuevoCliente.getTelefono());
-            pre.setString(4, nuevoCliente.getEmail());
+            pre.setInt(1, nuevoCliente.getId());
+            pre.setString(2, nuevoCliente.getNombre());
+            pre.setString(3, nuevoCliente.getApellido());
+            pre.setString(4, nuevoCliente.getTelefono());
+            pre.setString(5, nuevoCliente.getEmail());
             ret = pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Test_h2.class.getName()).log(Level.SEVERE, "agregarCliente", ex);
         }
         return ret;
     }
+    
+    public Cliente buscarClientePorNombre(String nombre) {
+        Cliente objetivo = null;
+        try {
+            String query = "select * from clientes where nombre = ? limit 1;";
+            PreparedStatement pre = conn.prepareStatement(query);
+            pre.setString(1, nombre);
+            ResultSet rs = pre.executeQuery();
+            if(rs.next()) objetivo = new Cliente(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("telefono"), rs.getString("email"));
+        } catch (SQLException ex) {
+            Logger.getLogger(Test_h2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return objetivo;
+    }
+    
 }

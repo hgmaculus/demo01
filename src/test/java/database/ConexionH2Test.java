@@ -72,7 +72,6 @@ public class ConexionH2Test {
             }
         } catch (SQLException ex) {
         }
-        
     }
     
 }
