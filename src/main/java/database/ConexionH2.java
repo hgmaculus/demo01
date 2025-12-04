@@ -134,8 +134,8 @@ public class ConexionH2 implements AutoCloseable {
     }
 
     @Override
-    public void close() throws InterruptedException {
-        logger.info("Conexion H2 Close()");
+    public void close() {
+        logger.info("Calling AutoCloseable interface ConexionH2 Close()");
     }
 
     public int agregarCliente(Cliente nuevoCliente) {
