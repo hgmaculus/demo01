@@ -3,6 +3,7 @@ package menu;
 public class JDialogModal extends javax.swing.JDialog implements AutoCloseable {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogModal.class.getName());
+    private static final long serialVersionUID = 1L;
 
     public JDialogModal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
