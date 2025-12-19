@@ -2,6 +2,7 @@
 package clientes;
 
 public class Empresa {
+    private int id;
     private String cuit;
     private String razon_social;
     private String direccion;
@@ -57,6 +58,14 @@ public class Empresa {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
 }

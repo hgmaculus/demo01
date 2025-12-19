@@ -16,8 +16,7 @@ public class ConexionH2 implements AutoCloseable {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ConexionH2.class.getName());
     private Connection conn;
-
-    //private ResultSet rs;
+    
     public ConexionH2() {
         try {
             conn = DriverManager.getConnection("jdbc:h2:mem:test");
@@ -30,7 +29,6 @@ public class ConexionH2 implements AutoCloseable {
         int ret = 0;
         try (Statement stmt = conn.createStatement()) {
             ret = stmt.executeUpdate("create table cities (id integer, name varchar(50))");
-            //conn.commit();
         } catch (SQLException e) {
         }
         try (Statement stmt = conn.createStatement()) {
@@ -44,7 +42,7 @@ public class ConexionH2 implements AutoCloseable {
         } catch (SQLException e) {
         }
         try (Statement stmt = conn.createStatement()) {
-            ret = stmt.executeUpdate("create table empresas (id integer, cuit varchar(20), razon_social varchar(50), nombre varchar(40))");
+            ret = stmt.executeUpdate("create table empresas (id integer, cuit varchar(20), razon_social varchar(50), direccion varchar(80), nombre varchar(40))");
             System.out.println("database.ConexionH2.initDB() : Create table empresas");
         } catch (SQLException e) {
         }
@@ -155,10 +153,25 @@ public class ConexionH2 implements AutoCloseable {
         return ret;
     }
     
+    public int agregarEmpresa(Empresa nuevaEmpresa) {
+        int ret = 0;
+        try {
+            String query = "insert into empresas (id, cuit, razon_social, nombre) values (?, ?, ?, ?);";
+            PreparedStatement pre = conn.prepareStatement(query);
+            pre.setInt(1, nuevaEmpresa.getId());
+            pre.setString(2, nuevaEmpresa.getCuit());
+            pre.setString(3, nuevaEmpresa.getRazon_social());
+            pre.setString(4, nuevaEmpresa.getNombre());
+            ret = pre.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Test_h2.class.getName()).log(Level.SEVERE, "agregarCliente", ex);
+        }
+        return ret;
+    }
     public Cliente buscarClientePorNombre(String nombre) {
         Cliente objetivo = null;
         try {
-            String query = "select * from clientes where nombre = ? limit 1;";
+            String query = "select * from clientes where nombre like ? limit 1;";
             PreparedStatement pre = conn.prepareStatement(query);
             pre.setString(1, nombre);
             ResultSet rs = pre.executeQuery();
