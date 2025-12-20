@@ -10,7 +10,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import clientes.Cliente;
-import clientes.Empresa;
+import empresas.Empresa;
 
 public class ConexionH2 implements AutoCloseable {
 

@@ -1,5 +1,5 @@
 
-package clientes;
+package empresas;
 
 public class Empresa {
     private int id;
