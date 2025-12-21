@@ -29,8 +29,6 @@ public class FrameEmpresas extends menu.JDialogModal {
         textDireccion = new javax.swing.JTextField();
         labelTelefono = new javax.swing.JLabel();
         textTelefono = new javax.swing.JTextField();
-        labelEmail = new javax.swing.JLabel();
-        textEmail = new javax.swing.JTextField();
         labelNombre = new javax.swing.JLabel();
         textNombre = new javax.swing.JTextField();
         buttonAgregar = new javax.swing.JButton();
@@ -47,11 +45,10 @@ public class FrameEmpresas extends menu.JDialogModal {
 
         labelTelefono.setText("Telefono:");
 
-        labelEmail.setText("Email:");
-
         labelNombre.setText("Nombre:");
 
         buttonAgregar.setText("Agregar");
+        buttonAgregar.addActionListener(this::buttonAgregarActionPerformed);
 
         buttonBuscar.setText("Buscar");
 
@@ -74,14 +71,12 @@ public class FrameEmpresas extends menu.JDialogModal {
                                     .addComponent(labelDireccion)
                                     .addComponent(labelRazonSocial)
                                     .addComponent(labelTelefono)
-                                    .addComponent(labelEmail)
                                     .addComponent(labelNombre))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(textRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(textDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
                                     .addComponent(textTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(textNombre)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(29, 29, 29)
@@ -111,13 +106,9 @@ public class FrameEmpresas extends menu.JDialogModal {
                     .addComponent(textTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelEmail)
-                    .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNombre)
                     .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAgregar)
                     .addComponent(buttonBuscar))
@@ -143,6 +134,12 @@ public class FrameEmpresas extends menu.JDialogModal {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarActionPerformed
+        Empresa nuevaEmpresa = new Empresa(textCUIT.getText(), textRazonSocial.getText(), textDireccion.getText(), textNombre.getText(), textTelefono.getText());
+        System.out.println("empresas.FrameEmpresas.buttonAgregarActionPerformed()");
+        System.out.println(nuevaEmpresa.toString());
+    }//GEN-LAST:event_buttonAgregarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -176,13 +173,11 @@ public class FrameEmpresas extends menu.JDialogModal {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelCUIT;
     private javax.swing.JLabel labelDireccion;
-    private javax.swing.JLabel labelEmail;
     private javax.swing.JLabel labelNombre;
     private javax.swing.JLabel labelRazonSocial;
     private javax.swing.JLabel labelTelefono;
     private javax.swing.JTextField textCUIT;
     private javax.swing.JTextField textDireccion;
-    private javax.swing.JTextField textEmail;
     private javax.swing.JTextField textNombre;
     private javax.swing.JTextField textRazonSocial;
     private javax.swing.JTextField textTelefono;
