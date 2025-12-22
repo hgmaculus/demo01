@@ -11,6 +11,10 @@ public class JDialogModal extends javax.swing.JDialog implements AutoCloseable {
         setLocationRelativeTo(null);
     }
 
+    public JDialogModal() {
+        initComponents();
+        setLocationRelativeTo(null);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
