@@ -2,6 +2,8 @@
 package menu;
 
 public class CreditsDialog extends JDialogModal {
+
+    private static final long serialVersionUID = 1L;
     
     //private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CreditsDialog.class.getName());
 

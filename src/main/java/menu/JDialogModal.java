@@ -2,7 +2,7 @@ package menu;
 
 public class JDialogModal extends javax.swing.JDialog implements AutoCloseable {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogModal.class.getName());
+    //private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogModal.class.getName());
     private static final long serialVersionUID = 1L;
 
     public JDialogModal(java.awt.Frame parent, boolean modal) {
@@ -37,9 +37,8 @@ public class JDialogModal extends javax.swing.JDialog implements AutoCloseable {
     }// </editor-fold>//GEN-END:initComponents
 
     @Override
-    public void close() throws Exception {
+    public void close() {
         //logger.info("JDialogModal AutoClose");
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
