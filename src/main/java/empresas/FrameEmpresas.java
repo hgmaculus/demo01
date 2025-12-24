@@ -2,7 +2,7 @@ package empresas;
 import menu.JDialogModal;
 public class FrameEmpresas extends menu.JDialogModal {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrameEmpresas.class.getName());
+    //private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrameEmpresas.class.getName());
 
     public FrameEmpresas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -155,7 +155,7 @@ public class FrameEmpresas extends menu.JDialogModal {
                 }
             }
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
+            //logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

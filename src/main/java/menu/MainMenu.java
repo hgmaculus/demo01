@@ -1,6 +1,7 @@
 package menu;
 
 import ventas.FrameVentas;
+import empresas.FrameEmpresas;
 
 public class MainMenu extends javax.swing.JFrame {
     
@@ -23,9 +24,10 @@ public class MainMenu extends javax.swing.JFrame {
         buttonVentas = new javax.swing.JButton();
         buttonCredits = new javax.swing.JButton();
         buttonClientes = new javax.swing.JButton();
+        buttonEmpresas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Gnuino Demo");
+        setTitle("Gnuino Systems Demo v0.1");
 
         buttonVentas.setText("Ventas");
         buttonVentas.addActionListener(new java.awt.event.ActionListener() {
@@ -48,16 +50,24 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        buttonEmpresas.setText("Empresas");
+        buttonEmpresas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEmpresasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(buttonClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                    .addComponent(buttonVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonCredits, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonClientes, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+                    .addComponent(buttonVentas, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonCredits, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonEmpresas, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -67,7 +77,9 @@ public class MainMenu extends javax.swing.JFrame {
                 .addComponent(buttonVentas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonClientes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonEmpresas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
                 .addComponent(buttonCredits)
                 .addGap(52, 52, 52))
         );
@@ -98,9 +110,17 @@ public class MainMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonVentasActionPerformed
 
+    private void buttonEmpresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEmpresasActionPerformed
+        try (FrameEmpresas fempresas = new FrameEmpresas(this, true)) {
+            fempresas.setVisible(true);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_buttonEmpresasActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonClientes;
     private javax.swing.JButton buttonCredits;
+    private javax.swing.JButton buttonEmpresas;
     private javax.swing.JButton buttonVentas;
     // End of variables declaration//GEN-END:variables
 }

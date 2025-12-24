@@ -42,7 +42,7 @@ public class JDialogModal extends javax.swing.JDialog implements AutoCloseable {
 
     @Override
     public void close() {
-        //logger.info("JDialogModal AutoClose");
+        //System.out.println("JDialogModal AutoClose");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -9,6 +9,8 @@ public class CreditsDialog extends JDialogModal {
 
     /**
      * Creates new form CreditsDialog
+     * @param parent
+     * @param modal
      */
     public CreditsDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
