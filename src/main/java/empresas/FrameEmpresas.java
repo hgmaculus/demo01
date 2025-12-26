@@ -33,8 +33,8 @@ public class FrameEmpresas extends menu.JDialogModal {
         textNombre = new javax.swing.JTextField();
         buttonAgregar = new javax.swing.JButton();
         buttonBuscar = new javax.swing.JButton();
+        labelEstado = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Empresas");
 
         labelCUIT.setText("CUIT:");
@@ -115,13 +115,20 @@ public class FrameEmpresas extends menu.JDialogModal {
                 .addGap(38, 38, 38))
         );
 
+        labelEstado.setText("Estado:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labelEstado)))
                 .addContainerGap(141, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -129,16 +136,25 @@ public class FrameEmpresas extends menu.JDialogModal {
             .addGroup(layout.createSequentialGroup()
                 .addGap(105, 105, 105)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(192, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
+                .addComponent(labelEstado)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarActionPerformed
-        Empresa nuevaEmpresa = new Empresa(textCUIT.getText(), textRazonSocial.getText(), textDireccion.getText(), textNombre.getText(), textTelefono.getText());
-        System.out.println("empresas.FrameEmpresas.buttonAgregarActionPerformed()");
-        System.out.println(nuevaEmpresa.toString());
+        if(textCUIT.getText().isEmpty() || textRazonSocial.getText().isEmpty() || textDireccion.getText().isEmpty() || textNombre.getText().isEmpty() || textTelefono.getText().isEmpty()) {
+            labelEstado.setText("Estado: No pueden haber campos vacios");
+            return;
+        } else {
+            Empresa nuevaEmpresa = new Empresa(textCUIT.getText(), textRazonSocial.getText(), textDireccion.getText(), textNombre.getText(), textTelefono.getText());
+            //System.out.println("empresas.FrameEmpresas.buttonAgregarActionPerformed()");
+            System.out.println(nuevaEmpresa.toString());
+            labelEstado.setText("Estado: Nueva empresa agregada: " + nuevaEmpresa);
+        }
+        
     }//GEN-LAST:event_buttonAgregarActionPerformed
 
     public static void main(String args[]) {
@@ -173,6 +189,7 @@ public class FrameEmpresas extends menu.JDialogModal {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelCUIT;
     private javax.swing.JLabel labelDireccion;
+    private javax.swing.JLabel labelEstado;
     private javax.swing.JLabel labelNombre;
     private javax.swing.JLabel labelRazonSocial;
     private javax.swing.JLabel labelTelefono;
