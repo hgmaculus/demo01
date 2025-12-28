@@ -15,7 +15,16 @@ public class ConexionH2Pruebas {
             System.out.println(c.buscarClientePorNombre("Nuevo").toString());
             System.out.println(c.buscarClientePorNombre("Otro").toString());
             System.out.println("Empresas:");
+          
+            
         } catch (Exception e) {}
      
+        System.out.println("Parte 2: ");
+            try (ConexionH2 c = new ConexionH2()) {
+            System.out.println(c.buscarClientePorNombre("Nuevo").toString());
+            System.out.println(c.buscarClientePorNombre("Otro").toString());
+         
+        } catch (Exception e) {}
+
     }
 }

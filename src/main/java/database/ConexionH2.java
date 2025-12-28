@@ -1,4 +1,5 @@
 /* Author : H. Gabriel Máculus */
+// This object act like a singleton, each new object connect with same database and data
 package database;
 
 import java.sql.Connection;
@@ -29,6 +30,7 @@ public class ConexionH2 implements AutoCloseable {
         int ret = 0;
         try (Statement stmt = conn.createStatement()) {
             ret = stmt.executeUpdate("create table cities (id integer, name varchar(50))");
+            System.out.println("database.ConexionH2.initDB() : Create table cities");
         } catch (SQLException e) {
         }
         try (Statement stmt = conn.createStatement()) {

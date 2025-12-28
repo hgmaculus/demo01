@@ -6,6 +6,7 @@ import empresas.FrameEmpresas;
 public class MainMenu extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainMenu.class.getName());
+    private static final long serialVersionUID = 1L;
 
     public MainMenu() {
         initComponents();

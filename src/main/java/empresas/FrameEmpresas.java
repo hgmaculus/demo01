@@ -33,6 +33,7 @@ public class FrameEmpresas extends menu.JDialogModal {
         textNombre = new javax.swing.JTextField();
         buttonAgregar = new javax.swing.JButton();
         buttonBuscar = new javax.swing.JButton();
+        buttonLimpiar = new javax.swing.JButton();
         labelEstado = new javax.swing.JLabel();
 
         setTitle("Empresas");
@@ -51,6 +52,9 @@ public class FrameEmpresas extends menu.JDialogModal {
         buttonAgregar.addActionListener(this::buttonAgregarActionPerformed);
 
         buttonBuscar.setText("Buscar");
+
+        buttonLimpiar.setText("Limpiar");
+        buttonLimpiar.addActionListener(this::buttonLimpiarActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -82,7 +86,9 @@ public class FrameEmpresas extends menu.JDialogModal {
                                 .addGap(29, 29, 29)
                                 .addComponent(buttonAgregar)
                                 .addGap(18, 18, 18)
-                                .addComponent(buttonBuscar)))))
+                                .addComponent(buttonBuscar)
+                                .addGap(18, 18, 18)
+                                .addComponent(buttonLimpiar)))))
                 .addContainerGap(148, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -111,7 +117,8 @@ public class FrameEmpresas extends menu.JDialogModal {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAgregar)
-                    .addComponent(buttonBuscar))
+                    .addComponent(buttonBuscar)
+                    .addComponent(buttonLimpiar))
                 .addGap(38, 38, 38))
         );
 
@@ -147,15 +154,21 @@ public class FrameEmpresas extends menu.JDialogModal {
     private void buttonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarActionPerformed
         if(textCUIT.getText().isEmpty() || textRazonSocial.getText().isEmpty() || textDireccion.getText().isEmpty() || textNombre.getText().isEmpty() || textTelefono.getText().isEmpty()) {
             labelEstado.setText("Estado: No pueden haber campos vacios");
-            return;
         } else {
             Empresa nuevaEmpresa = new Empresa(textCUIT.getText(), textRazonSocial.getText(), textDireccion.getText(), textNombre.getText(), textTelefono.getText());
             //System.out.println("empresas.FrameEmpresas.buttonAgregarActionPerformed()");
             System.out.println(nuevaEmpresa.toString());
             labelEstado.setText("Estado: Nueva empresa agregada: " + nuevaEmpresa);
         }
-        
     }//GEN-LAST:event_buttonAgregarActionPerformed
+
+    private void buttonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimpiarActionPerformed
+        textCUIT.setText("");
+        textRazonSocial.setText("");
+        textDireccion.setText("");
+        textNombre.setText("");
+        textTelefono.setText("");
+    }//GEN-LAST:event_buttonLimpiarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -186,6 +199,7 @@ public class FrameEmpresas extends menu.JDialogModal {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAgregar;
     private javax.swing.JButton buttonBuscar;
+    private javax.swing.JButton buttonLimpiar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelCUIT;
     private javax.swing.JLabel labelDireccion;
