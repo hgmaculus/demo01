@@ -2,7 +2,6 @@
 package database;
 
 import clientes.Cliente;
-import java.sql.SQLException;
 
 public class ConexionH2Pruebas {
     public static void main(String[] args) {
