@@ -1,8 +1,15 @@
 package usuarios;
 
 public class FrameAgregarUsuario extends menu.JDialogModal {
-    
+    private menu.JDialogModal parent;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrameAgregarUsuario.class.getName());
+    
+    public FrameAgregarUsuario(FrameUsuarios parent, boolean modal) {
+        super(null, modal);
+        parent.setVisible(false);
+        this.parent = parent;
+        initComponents();
+    }
     public FrameAgregarUsuario() {
         initComponents();
     }
@@ -24,9 +31,15 @@ public class FrameAgregarUsuario extends menu.JDialogModal {
         comboNivelDeAcceso = new javax.swing.JComboBox<>();
         buttonAgregarUsuario = new javax.swing.JButton();
         labelEstado = new javax.swing.JLabel();
+        checkBoxActivo = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar Usuario");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         labelNombre.setText("Nombre:");
 
@@ -41,6 +54,8 @@ public class FrameAgregarUsuario extends menu.JDialogModal {
 
         labelEstado.setText("Estado:");
 
+        checkBoxActivo.setText("Activo");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -48,14 +63,13 @@ public class FrameAgregarUsuario extends menu.JDialogModal {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labelEstado))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(buttonAgregarUsuario)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(labelNivelDeAcceso)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(comboNivelDeAcceso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(labelClave)
@@ -63,11 +77,13 @@ public class FrameAgregarUsuario extends menu.JDialogModal {
                                     .addGap(35, 35, 35)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(textClave, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(labelEstado)))
-                .addContainerGap(54, Short.MAX_VALUE))
+                                        .addComponent(textClave, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(labelNivelDeAcceso)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(comboNivelDeAcceso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(checkBoxActivo))))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -84,9 +100,11 @@ public class FrameAgregarUsuario extends menu.JDialogModal {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelNivelDeAcceso)
                     .addComponent(comboNivelDeAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(18, 18, 18)
+                .addComponent(checkBoxActivo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(buttonAgregarUsuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
                 .addComponent(labelEstado)
                 .addContainerGap())
         );
@@ -95,9 +113,13 @@ public class FrameAgregarUsuario extends menu.JDialogModal {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonAgregarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarUsuarioActionPerformed
-        Usuario u = new Usuario(0, textNombre.getText(), textClave.getText(), (String)comboNivelDeAcceso.getSelectedItem());
+        Usuario u = new Usuario(0, textNombre.getText(), textClave.getText(), (String)comboNivelDeAcceso.getSelectedItem(), checkBoxActivo.isSelected());
         labelEstado.setText(u.toString());
     }//GEN-LAST:event_buttonAgregarUsuarioActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        parent.setVisible(true);
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
@@ -126,6 +148,7 @@ public class FrameAgregarUsuario extends menu.JDialogModal {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAgregarUsuario;
+    private javax.swing.JCheckBox checkBoxActivo;
     private javax.swing.JComboBox<String> comboNivelDeAcceso;
     private javax.swing.JLabel labelClave;
     private javax.swing.JLabel labelEstado;

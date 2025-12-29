@@ -5,11 +5,13 @@ public class Usuario {
     private String nombre;
     private String clave;
     private int nivel;
+    private boolean activo;
 
-    public Usuario(int id, String nombre, String clave, String nivelDeAcceso) {
+    public Usuario(int id, String nombre, String clave, String nivelDeAcceso, boolean act) {
         this.id = id;
         this.nombre = nombre;
         this.clave = clave;
+        this.activo = act;
         switch (nivelDeAcceso) {
             case "Vendedor":
                 this.nivel = 1;
@@ -76,8 +78,17 @@ public class Usuario {
         sb.append(", nombre=").append(nombre);
         sb.append(", clave=").append(clave);
         sb.append(", nivel=").append(nivel);
+        sb.append(", activo=").append(activo);
         sb.append('}');
         return sb.toString();
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
     
 }
