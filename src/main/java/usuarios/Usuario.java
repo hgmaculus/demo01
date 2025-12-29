@@ -6,6 +6,29 @@ public class Usuario {
     private String clave;
     private int nivel;
 
+    public Usuario(int id, String nombre, String clave, String nivelDeAcceso) {
+        this.id = id;
+        this.nombre = nombre;
+        this.clave = clave;
+        switch (nivelDeAcceso) {
+            case "Vendedor":
+                this.nivel = 1;
+                break;
+            case "Revisor":
+                this.nivel = 2;
+                break;
+            case "Repositor":
+                this.nivel = 3;
+                break;
+            case "Administrador":
+                this.nivel = 4;
+                break;
+            default:
+                throw new AssertionError();
+        }
+        
+    }
+    
     public Usuario(int id, String nombre, String clave, int nivel) {
         this.id = id;
         this.nombre = nombre;
