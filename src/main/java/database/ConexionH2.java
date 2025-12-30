@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import clientes.Cliente;
+import usuarios.Usuario;
 import empresas.Empresa;
 
 public class ConexionH2 implements AutoCloseable {
@@ -155,6 +156,22 @@ public class ConexionH2 implements AutoCloseable {
         return ret;
     }
     
+    //"create table usuarios (id integer, nombre varchar(50), clave varchar(50), nivel integer)"
+    public boolean agregarUsuario(Usuario u) {
+        int ret = 0;
+        try {
+            String query = "insert into usuarios(nombre, clave, nivel) values (?, ?, ?);";
+            PreparedStatement pre = conn.prepareStatement(query);
+            pre.setString(1, u.getNombre());
+            pre.setString(2, u.getClave());
+            pre.setInt(3, u.getNivel());
+            ret = pre.executeUpdate();
+            if(ret == 0) System.out.println("database.ConexionH2.agregarUsuario(): Failed!");
+        } catch (SQLException ex) {
+            Logger.getLogger(Test_h2.class.getName()).log(Level.SEVERE, "agregarCliente", ex);
+        }
+        return true;
+    }
     public int agregarEmpresa(Empresa nuevaEmpresa) {
         int ret = 0;
         try {

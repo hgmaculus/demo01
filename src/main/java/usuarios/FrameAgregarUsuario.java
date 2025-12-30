@@ -1,5 +1,7 @@
 package usuarios;
 
+import database.ConexionH2;
+
 public class FrameAgregarUsuario extends menu.JDialogModal {
     private menu.JDialogModal parent;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrameAgregarUsuario.class.getName());
@@ -115,6 +117,11 @@ public class FrameAgregarUsuario extends menu.JDialogModal {
     private void buttonAgregarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarUsuarioActionPerformed
         Usuario u = new Usuario(0, textNombre.getText(), textClave.getText(), (String)comboNivelDeAcceso.getSelectedItem(), checkBoxActivo.isSelected());
         labelEstado.setText(u.toString());
+        try (ConexionH2 c = new ConexionH2()){
+            c.initDB();
+            c.agregarUsuario(u);
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_buttonAgregarUsuarioActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
