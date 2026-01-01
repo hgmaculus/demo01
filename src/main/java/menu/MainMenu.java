@@ -92,6 +92,7 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         try(CreditsDialog c = new CreditsDialog(this, true);) {
             c.setVisible(true);
+            
         } catch (Exception e) {
         }
         

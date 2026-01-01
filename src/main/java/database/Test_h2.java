@@ -18,7 +18,7 @@ public class Test_h2 {
         long startTime = System.currentTimeMillis();
         try (Connection conn = DriverManager.getConnection("jdbc:h2:mem:test")) {
             Statement stmt = conn.createStatement();
-            boolean ret = true;
+            boolean ret;
             //ret = stmt.execute("create table cities (id integer, name varchar(50))");
             
             //if(ret) System.out.println("execute failed");

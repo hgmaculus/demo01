@@ -29,11 +29,13 @@ public class ConexionH2 implements AutoCloseable {
 
     public int initDB() {
         int ret = 0;
+        /*
         try (Statement stmt = conn.createStatement()) {
             ret = stmt.executeUpdate("create table cities (id integer, name varchar(50))");
             System.out.println("database.ConexionH2.initDB() : Create table cities");
         } catch (SQLException e) {
         }
+*/
         try (Statement stmt = conn.createStatement()) {
             ret = stmt.executeUpdate("create table clientes (id integer, nombre varchar(50), apellido varchar(50), telefono varchar(30), email varchar(40))");
             System.out.println("database.ConexionH2.initDB() : Create table clientes");
@@ -54,8 +56,10 @@ public class ConexionH2 implements AutoCloseable {
 
     public int seedDB() {
         int ret = 0;
+        /*
         try (Statement stmt = conn.createStatement()) {
             // insert multiples values
+            
             ret = stmt.executeUpdate("insert into cities (id, name) values "
                     + "(1, \'General Alvear\'), "
                     + "(2, \'Real del Padre\'), "
@@ -66,6 +70,7 @@ public class ConexionH2 implements AutoCloseable {
             conn.commit();
         } catch (SQLException e) {
         }
+*/
         // Seed Clientes
         try (Statement stmt = conn.createStatement()) {
             // insert one value
@@ -109,11 +114,13 @@ public class ConexionH2 implements AutoCloseable {
 
     public void readDB() {
         try (Statement stmt = conn.createStatement()){
-            ResultSet rs = stmt.executeQuery("select * from cities;");
+            ResultSet rs;
+            /*
+            rs = stmt.executeQuery("select * from cities;");
             while (rs.next()) {
                 System.out.println("id: " + rs.getString("id") + " name: " + rs.getString("name"));
             }
-            
+            */
             rs = stmt.executeQuery("select * from clientes;");
             System.out.println("Lista Clientes");
             while (rs.next()) {
