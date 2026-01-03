@@ -26,6 +26,7 @@ public class MainMenu extends javax.swing.JFrame {
         buttonCredits = new javax.swing.JButton();
         buttonClientes = new javax.swing.JButton();
         buttonEmpresas = new javax.swing.JButton();
+        buttonUsuarios = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gnuino Systems Demo v0.1");
@@ -58,6 +59,13 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        buttonUsuarios.setText("Usuarios");
+        buttonUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonUsuariosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,7 +76,8 @@ public class MainMenu extends javax.swing.JFrame {
                     .addComponent(buttonClientes, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
                     .addComponent(buttonVentas, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonCredits, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonEmpresas, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE))
+                    .addComponent(buttonEmpresas, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+                    .addComponent(buttonUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -80,7 +89,9 @@ public class MainMenu extends javax.swing.JFrame {
                 .addComponent(buttonClientes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonEmpresas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonUsuarios)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
                 .addComponent(buttonCredits)
                 .addGap(52, 52, 52))
         );
@@ -119,10 +130,15 @@ public class MainMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonEmpresasActionPerformed
 
+    private void buttonUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUsuariosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonUsuariosActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonClientes;
     private javax.swing.JButton buttonCredits;
     private javax.swing.JButton buttonEmpresas;
+    private javax.swing.JButton buttonUsuarios;
     private javax.swing.JButton buttonVentas;
     // End of variables declaration//GEN-END:variables
 }

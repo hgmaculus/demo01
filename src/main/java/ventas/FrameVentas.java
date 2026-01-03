@@ -2,15 +2,15 @@ package ventas;
 
 public class FrameVentas extends menu.JDialogModal {
     
+    java.awt.Frame parent;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrameVentas.class.getName());
 
-    /**
-     * Creates new form FrameVentas
-     */
     public FrameVentas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        this.parent = parent;
+        this.parent.setVisible(false);
     }
 
     /**
@@ -29,10 +29,13 @@ public class FrameVentas extends menu.JDialogModal {
         labelCantidad = new javax.swing.JLabel();
         labelbarcode = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ventas");
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setSize(new java.awt.Dimension(800, 600));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         buttonBuscar.setText("Buscar");
         buttonBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -100,6 +103,10 @@ public class FrameVentas extends menu.JDialogModal {
     private void buttonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonBuscarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        this.parent.setVisible(true);
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

@@ -31,6 +31,7 @@
                   <Component id="buttonVentas" alignment="2" max="32767" attributes="0"/>
                   <Component id="buttonCredits" alignment="2" min="-2" pref="85" max="-2" attributes="0"/>
                   <Component id="buttonEmpresas" alignment="0" pref="352" max="32767" attributes="0"/>
+                  <Component id="buttonUsuarios" alignment="0" pref="352" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -45,7 +46,9 @@
               <Component id="buttonClientes" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="buttonEmpresas" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="176" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="buttonUsuarios" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="145" max="32767" attributes="0"/>
               <Component id="buttonCredits" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
           </Group>
@@ -83,6 +86,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEmpresasActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="buttonUsuarios">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Usuarios"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonUsuariosActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
