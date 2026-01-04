@@ -24,8 +24,10 @@ public class FrameLogin extends menu.JDialogModal {
         textContrasena = new javax.swing.JTextField();
         textUsuario = new javax.swing.JTextField();
         buttonIngresar = new javax.swing.JButton();
+        labelEstado = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Ingreso Gnuino System");
 
         labelContrasena.setText("Contraseña:");
 
@@ -61,6 +63,9 @@ public class FrameLogin extends menu.JDialogModal {
         );
 
         buttonIngresar.setText("Ingresar");
+        buttonIngresar.addActionListener(this::buttonIngresarActionPerformed);
+
+        labelEstado.setText("Estado:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -68,9 +73,13 @@ public class FrameLogin extends menu.JDialogModal {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(buttonIngresar)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(buttonIngresar)
+                            .addGap(8, 8, 8)))
+                    .addComponent(labelEstado))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -78,17 +87,21 @@ public class FrameLogin extends menu.JDialogModal {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonIngresar)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelEstado)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+    private void buttonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonIngresarActionPerformed
+        LoginUsuario u = new LoginUsuario(textUsuario.getText(), textContrasena.getText());
+        labelEstado.setText("Estado: " + u);
+    }//GEN-LAST:event_buttonIngresarActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -115,6 +128,7 @@ public class FrameLogin extends menu.JDialogModal {
     private javax.swing.JButton buttonIngresar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelContrasena;
+    private javax.swing.JLabel labelEstado;
     private javax.swing.JLabel labelUsuario;
     private javax.swing.JTextField textContrasena;
     private javax.swing.JTextField textUsuario;
