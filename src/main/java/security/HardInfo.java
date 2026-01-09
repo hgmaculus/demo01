@@ -1,15 +1,20 @@
-
 package security;
 
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Objects;
 
 public class HardInfo {
+
     private ArrayList<String> listPhysAddress;
 
     public HardInfo() {
+        listPhysAddress = new ArrayList<String>();
+    }
+
+    public void Load() {
         try {
             Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
             while (networkInterfaces.hasMoreElements()) {
@@ -32,9 +37,19 @@ public class HardInfo {
     // Check return true when hinfo is available
     public boolean Check(String hinfo) {
         for (String l : listPhysAddress) {
-            if(l.equals(hinfo)) return true;
+            if (l.equals(hinfo)) {
+                return true;
+            }
         }
         return false;
     }
-    
+
+    public ArrayList<String> getListPhysAddress() {
+        if (Objects.nonNull(listPhysAddress)) {
+            return listPhysAddress;
+        } else {
+            return new ArrayList<String>();
+        }
+    }
+
 }

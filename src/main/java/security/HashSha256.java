@@ -3,9 +3,8 @@ package security;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 
-public class HashSha512 {
+public class HashSha256 {
                 
     private MessageDigest md;
     private byte[] messageDigest;
@@ -19,11 +18,11 @@ public class HashSha512 {
         MessageDigest m;
         byte[] messageDigest;
         try {
-            m = MessageDigest.getInstance("SHA-512");
+            m = MessageDigest.getInstance("SHA-256");
             messageDigest = m.digest(text.getBytes());
             BigInteger no = new BigInteger(1, messageDigest);
             hashed = no.toString(16);
-            while (hashed.length() < 128) {
+            while (hashed.length() < 64) {
                 hashed = "0" + hashed;
             }
         } catch (NoSuchAlgorithmException ex) {
@@ -31,11 +30,11 @@ public class HashSha512 {
         }
         return hashed;
     }
-    public HashSha512() {
+    public HashSha256() {
         try {
-            md = MessageDigest.getInstance("SHA-512");
+            md = MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException ex) {
-            System.getLogger(HashSha512.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            System.getLogger(HashSha256.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }
 
@@ -51,7 +50,7 @@ public class HashSha512 {
     public void encode() {
         BigInteger no = new BigInteger(1, messageDigest);
         hashText = no.toString(16);
-        while (hashText.length() < 128) {
+        while (hashText.length() < 64) {
                 hashText = "0" + hashText;
             }
     }
@@ -61,18 +60,11 @@ public class HashSha512 {
     }
     
     public static void main(String[] args) {
-        HashSha512 h = new HashSha512();
+        HashSha256 h = new HashSha256();
         h.setInputText("22:47:5C:01:05:9D");
         h.encode();
-        System.out.println("security.HashSha512.main(): \n" + h.getHashText());
-        HardInfo hi = new HardInfo();
-        hi.Load();
-        ArrayList<String> listPhysAddress = hi.getListPhysAddress();
-        listPhysAddress.forEach(System.out::println);
-        
-        
-        System.out.println("---------------------------");
-        System.out.println(HashSha512.textToHash("22:47:5C:01:05:9D"));
-        
+        System.out.println("security.HashSha256.main(): " + h.getHashText());
+        System.out.println("-----------------------------------");
+        System.out.println("security.HashSha256.main(): " + HashSha256.textToHash("22:47:5C:01:05:9D"));
     }
 }
