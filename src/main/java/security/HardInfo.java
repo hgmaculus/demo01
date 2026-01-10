@@ -8,10 +8,10 @@ import java.util.Objects;
 
 public class HardInfo {
 
-    private ArrayList<String> listPhysAddress;
+    private final ArrayList<String> listPhysAddress;
 
     public HardInfo() {
-        listPhysAddress = new ArrayList<String>();
+        listPhysAddress = new ArrayList<>();
     }
 
     public void Load() {
@@ -48,8 +48,13 @@ public class HardInfo {
         if (Objects.nonNull(listPhysAddress)) {
             return listPhysAddress;
         } else {
-            return new ArrayList<String>();
+            return new ArrayList<>();
         }
     }
 
+    public static void main(String[] args) {
+        HardInfo h = new HardInfo();
+        h.Load();
+        h.getListPhysAddress().forEach(System.out::println);
+    }
 }

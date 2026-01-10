@@ -11,7 +11,7 @@ public class HashSha256 {
     private String inputText, hashText;
 
     /* 
-        Return SHA512 String from text input
+        Return SHA256 String from text input
     */
     public static String textToHash(String text) {
         String hashed = "";
