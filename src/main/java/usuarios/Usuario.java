@@ -28,14 +28,41 @@ public class Usuario {
             default:
                 throw new AssertionError();
         }
-        
     }
     
-    public Usuario(int id, String nombre, String clave, int nivel) {
+    public Usuario(String nombre, String clave, String nivelDeAcceso, boolean act) {
+        this.nombre = nombre;
+        this.clave = clave;
+        this.activo = act;
+        switch (nivelDeAcceso) {
+            case "Vendedor":
+                this.nivel = 1;
+                break;
+            case "Revisor":
+                this.nivel = 2;
+                break;
+            case "Repositor":
+                this.nivel = 3;
+                break;
+            case "Administrador":
+                this.nivel = 4;
+                break;
+            default:
+                throw new AssertionError();
+        }
+    }
+    public Usuario(int id, String nombre, String clave, int nivel, boolean act) {
         this.id = id;
         this.nombre = nombre;
         this.clave = clave;
         this.nivel = nivel;
+        this.activo = act;
+    }
+    public Usuario(String nombre, String clave, int nivel, boolean act) {
+        this.nombre = nombre;
+        this.clave = clave;
+        this.nivel = nivel;
+        this.activo = act;
     }
 
     public int getId() {
@@ -66,8 +93,18 @@ public class Usuario {
         return nivel;
     }
 
+    public String getNivelasString() {
+        return switch (this.nivel) {
+            case 1 -> "Vendedor";
+            case 2 -> "Revisor";
+            case 3 -> "Repositor";
+            case 5 -> "Administrador";
+            default -> "Nivel de usuario no valido";
+        };
+    }
+
     public void setNivel(int nivel) {
-        this.nivel = nivel;
+        if(nivel > 0 && nivel < 5) this.nivel = nivel;
     }
 
     @Override
@@ -77,7 +114,7 @@ public class Usuario {
         sb.append("id=").append(id);
         sb.append(", nombre=").append(nombre);
         sb.append(", clave=").append(clave);
-        sb.append(", nivel=").append(nivel);
+        sb.append(", nivel=").append(getNivelasString());
         sb.append(", activo=").append(activo);
         sb.append('}');
         return sb.toString();

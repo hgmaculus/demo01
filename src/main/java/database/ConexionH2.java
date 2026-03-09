@@ -42,7 +42,7 @@ public class ConexionH2 implements AutoCloseable {
         } catch (SQLException e) {
         }
         try (Statement stmt = conn.createStatement()) {
-            ret = stmt.executeUpdate("create table usuarios (id integer, nombre varchar(50), clave varchar(50), nivel integer)");
+            ret = stmt.executeUpdate("create table usuarios (id integer primary key auto_increment, nombre varchar(50), clave varchar(50), nivel integer)");
             System.out.println("database.ConexionH2.initDB() : Create table usuarios");
         } catch (SQLException e) {
         }
@@ -165,8 +165,8 @@ public class ConexionH2 implements AutoCloseable {
     
     //"create table usuarios (id integer, nombre varchar(50), clave varchar(50), nivel integer)"
     public boolean agregarUsuario(Usuario u) {
-        int ret = 0;
         try {
+            int ret;
             String query = "insert into usuarios(nombre, clave, nivel) values (?, ?, ?);";
             PreparedStatement pre = conn.prepareStatement(query);
             pre.setString(1, u.getNombre());
