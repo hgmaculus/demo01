@@ -42,7 +42,7 @@ public class ConexionH2 implements AutoCloseable {
         } catch (SQLException e) {
         }
         try (Statement stmt = conn.createStatement()) {
-            ret = stmt.executeUpdate("create table usuarios (id integer primary key auto_increment, nombre varchar(50), clave varchar(50), nivel integer)");
+            ret = stmt.executeUpdate("create table usuarios (id integer primary key auto_increment, nombre varchar(50) unique, clave varchar(50), nivel integer)");
             System.out.println("database.ConexionH2.initDB() : Create table usuarios");
         } catch (SQLException e) {
         }
@@ -166,16 +166,15 @@ public class ConexionH2 implements AutoCloseable {
     //"create table usuarios (id integer, nombre varchar(50), clave varchar(50), nivel integer)"
     public boolean agregarUsuario(Usuario u) {
         try {
-            int ret;
             String query = "insert into usuarios(nombre, clave, nivel) values (?, ?, ?);";
             PreparedStatement pre = conn.prepareStatement(query);
             pre.setString(1, u.getNombre());
             pre.setString(2, u.getClave());
             pre.setInt(3, u.getNivel());
-            ret = pre.executeUpdate();
-            if(ret == 0) System.out.println("database.ConexionH2.agregarUsuario(): Failed!");
+            pre.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(Test_h2.class.getName()).log(Level.SEVERE, "agregarCliente", ex);
+            Logger.getLogger(Test_h2.class.getName()).log(Level.SEVERE, "agregarCliente posible duplicate value", ex);
+            return false;
         }
         return true;
     }

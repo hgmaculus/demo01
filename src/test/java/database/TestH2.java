@@ -9,9 +9,11 @@ public class TestH2 {
         //ConexionH2Test c = new ConexionH2Test();
         ConexionH2 c = new ConexionH2();
         c.initDB();
-        System.out.println(new Usuario("user1", "clave1", 3, true).getNivelasString());
+        System.out.println(new Usuario("user1", "clave1", 3, true).toString());
 
         c.agregarUsuario(new Usuario("user1", "clave1", 4, true));
+        
+        System.out.println(c.agregarUsuario(new Usuario("user1", "clave1", 4, true)));
         c.agregarUsuario(new Usuario("user2", "clave2", 4, true));
         c.agregarUsuario(new Usuario("user3", "clave3", 4, true));
         c.readDB();

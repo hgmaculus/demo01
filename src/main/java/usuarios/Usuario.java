@@ -31,6 +31,7 @@ public class Usuario {
     }
     
     public Usuario(String nombre, String clave, String nivelDeAcceso, boolean act) {
+        this.id = 0;
         this.nombre = nombre;
         this.clave = clave;
         this.activo = act;
