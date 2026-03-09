@@ -7,10 +7,11 @@ import javax.swing.table.DefaultTableModel;
 public class FrameClientes extends menu.JDialogModal {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrameClientes.class.getName());
+    private static final long serialVersionUID = 1L;
 
     public FrameClientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
+        this.initComponents();
         String[] columnNames = {"ID", "Nombre", "Telefono"};
         Object[][] data = {
             {10, "Diamante", "2604251452"}
