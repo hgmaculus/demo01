@@ -2,6 +2,7 @@
 // This object act like a singleton, each new object connect with same database and data
 package database;
 
+import articulos.Articulo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,6 +14,7 @@ import java.util.logging.Logger;
 import clientes.Cliente;
 import usuarios.Usuario;
 import empresas.Empresa;
+import java.math.BigDecimal;
 
 public class ConexionH2 implements AutoCloseable {
 
@@ -51,6 +53,11 @@ public class ConexionH2 implements AutoCloseable {
             System.out.println("database.ConexionH2.initDB() : Create table empresas");
         } catch (SQLException e) {
         }
+         try (Statement stmt = conn.createStatement()) {
+            ret = stmt.executeUpdate("create table articulos (id integer auto_increment primary key, cantidad integer, nombre varchar(50) unique, detalle varchar(80), precio decimal(14,2))");
+            System.out.println("database.ConexionH2.initDB() : Create table articulos");
+        } catch (SQLException e) {
+        }
         return ret;
     }
 
@@ -77,13 +84,9 @@ public class ConexionH2 implements AutoCloseable {
             ret = stmt.executeUpdate("insert into clientes (id, nombre, apellido, telefono, email) values "
                     + "(1, \'Gabriel\', \'Maculus\', \'2625525130\', \'gabrielmaculus@gmail.com\'); "
                     );
-            System.out.println("ConexionH2.seedDB(clientes): executeUpdate: " + ret);  
             ret = stmt.executeUpdate("insert into clientes (id, nombre, apellido, telefono, email) values "
                     + "(1, \'Luis\', \'Gonzalez\', \'262533455\', \'ninguno@gmail.com\'); "
                     );
-            System.out.println("ConexionH2.seedDB(clientes): executeUpdate: " + ret);  
-            
-            
         } catch (SQLException e) {
             System.out.println("database.ConexionH2.seedDB() Exception: insert into clientes " + e.getMessage());
         }
@@ -108,6 +111,19 @@ public class ConexionH2 implements AutoCloseable {
             System.out.println("ConexionH2.seedDB(empresas): executeUpdate: " + ret);
         } catch (SQLException e) {
             System.out.println("database.ConexionH2.seedDB() Exception: insert into empresas");
+        }
+        
+        // Seed Articulos
+             
+        try { // Agregar articulos
+            String query = "insert into articulos (cantidad, nombre, detalle, precio) values (?, ?, ?, ?);";
+            PreparedStatement pre = conn.prepareStatement(query);
+            pre.setInt(1, 90);
+            pre.setString(2, "Alfajores");
+            pre.setString(3, "100u");
+            pre.setBigDecimal(4, new BigDecimal("88.77"));
+            ret = pre.executeUpdate();
+        } catch (SQLException ex) {
         }
         return ret;
     }
@@ -136,6 +152,11 @@ public class ConexionH2 implements AutoCloseable {
             while (rs.next()) {
                 System.out.println("id: " + rs.getString("cuit") + " name: " + rs.getString("nombre"));
             }
+            rs = stmt.executeQuery("select * from articulos;");
+            System.out.println("Lista Articulos");
+            while (rs.next()) {
+                System.out.println("id: " + rs.getInt("id") + " name: " + rs.getString("nombre") + " precio: " + rs.getBigDecimal("precio"));
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Test_h2.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -146,6 +167,20 @@ public class ConexionH2 implements AutoCloseable {
         logger.info("Calling AutoCloseable interface ConexionH2 Close()");
     }
 
+    public int agregarArticulo(Articulo articulo) {
+        int ret = 0;
+        try { // Agregar articulos
+            String query = "insert into articulos (cantidad, nombre, detalle, precio) values (?, ?, ?, ?);";
+            PreparedStatement pre = conn.prepareStatement(query);
+            pre.setInt(1, articulo.getCantidad());
+            pre.setString(2, articulo.getNombre());
+            pre.setString(3, articulo.getDetalle());
+            pre.setBigDecimal(4, articulo.getPrecio());
+            ret = pre.executeUpdate();
+        } catch (SQLException ex) {
+        }
+        return ret;
+    }
     public int agregarCliente(Cliente nuevoCliente) {
         int ret = 0;
         try {

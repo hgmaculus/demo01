@@ -1,6 +1,8 @@
 
 package database;
 
+import articulos.Articulo;
+import java.math.BigDecimal;
 import usuarios.Usuario;
 
 public class TestH2 {
@@ -9,13 +11,9 @@ public class TestH2 {
         //ConexionH2Test c = new ConexionH2Test();
         ConexionH2 c = new ConexionH2();
         c.initDB();
-        System.out.println(new Usuario("user1", "clave1", 3, true).toString());
-
-        c.agregarUsuario(new Usuario("user1", "clave1", 4, true));
-        
-        System.out.println(c.agregarUsuario(new Usuario("user1", "clave1", 4, true)));
-        c.agregarUsuario(new Usuario("user2", "clave2", 4, true));
-        c.agregarUsuario(new Usuario("user3", "clave3", 4, true));
+        c.seedDB();
+        c.agregarArticulo(new Articulo(78, "Galletitas", "Criollitas", new BigDecimal("0.78")));
+        c.agregarArticulo(new Articulo(78, "Galletitas Dulces", "Criollitas", new BigDecimal("1.78")));
         c.readDB();
     }
 }
