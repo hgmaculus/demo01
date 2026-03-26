@@ -1,5 +1,6 @@
 package menu;
 
+import configuracion.FrameConfiguracion;
 import ventas.FrameVentas;
 import empresas.FrameEmpresas;
 
@@ -27,6 +28,7 @@ public class MainMenu extends javax.swing.JFrame {
         buttonClientes = new javax.swing.JButton();
         buttonEmpresas = new javax.swing.JButton();
         buttonUsuarios = new javax.swing.JButton();
+        buttonConfiguracion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gnuino Systems Demo v0.1");
@@ -66,6 +68,13 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        buttonConfiguracion.setText("Configuracion");
+        buttonConfiguracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonConfiguracionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -77,7 +86,8 @@ public class MainMenu extends javax.swing.JFrame {
                     .addComponent(buttonVentas, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonCredits, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonEmpresas, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
-                    .addComponent(buttonUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE))
+                    .addComponent(buttonUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+                    .addComponent(buttonConfiguracion, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -91,7 +101,9 @@ public class MainMenu extends javax.swing.JFrame {
                 .addComponent(buttonEmpresas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonUsuarios)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonConfiguracion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
                 .addComponent(buttonCredits)
                 .addGap(52, 52, 52))
         );
@@ -134,8 +146,16 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonUsuariosActionPerformed
 
+    private void buttonConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfiguracionActionPerformed
+        try(FrameConfiguracion fconf = new FrameConfiguracion(this, true)) {
+            fconf.setVisible(true);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_buttonConfiguracionActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonClientes;
+    private javax.swing.JButton buttonConfiguracion;
     private javax.swing.JButton buttonCredits;
     private javax.swing.JButton buttonEmpresas;
     private javax.swing.JButton buttonUsuarios;

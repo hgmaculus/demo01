@@ -28,6 +28,8 @@ public class FrameVentas extends menu.JDialogModal {
         textCantidad = new javax.swing.JTextField();
         labelCantidad = new javax.swing.JLabel();
         labelbarcode = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableArticulos = new utilsgui.JTableReadonly();
 
         setTitle("Ventas");
         setSize(new java.awt.Dimension(800, 600));
@@ -80,13 +82,30 @@ public class FrameVentas extends menu.JDialogModal {
                 .addContainerGap())
         );
 
+        javax.swing.table.DefaultTableModel table = new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Nombre", "Precio"
+            }
+        );
+        tableArticulos.setModel(table);
+        tableArticulos.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tableArticulos.getColumnModel().getColumn(0).setPreferredWidth(200);
+        tableArticulos.getColumnModel().getColumn(1).setPreferredWidth(90);
+        jScrollPane1.setViewportView(tableArticulos);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(281, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -94,7 +113,9 @@ public class FrameVentas extends menu.JDialogModal {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(313, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         pack();
@@ -148,8 +169,10 @@ public class FrameVentas extends menu.JDialogModal {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonBuscar;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelCantidad;
     private javax.swing.JLabel labelbarcode;
+    private javax.swing.JTable tableArticulos;
     private javax.swing.JTextField textCantidad;
     private javax.swing.JTextField textbarcode;
     // End of variables declaration//GEN-END:variables

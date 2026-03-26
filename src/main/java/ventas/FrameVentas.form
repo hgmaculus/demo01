@@ -29,9 +29,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="295" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="281" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -41,7 +44,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="313" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="352" max="-2" attributes="0"/>
+              <EmptySpace pref="50" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -111,6 +116,32 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Codigo de Barras"/>
           </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="tableArticulos">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="tableArticulos.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);&#xa;tableArticulos.getColumnModel().getColumn(0).setPreferredWidth(200);&#xa;tableArticulos.getColumnModel().getColumn(1).setPreferredWidth(90);">
+              <Connection code="table" type="code"/>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0"/>
+            </Property>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new utilsgui.JTableReadonly()"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="javax.swing.table.DefaultTableModel table = new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;        {null, null},&#xa;        {null, null}&#xa;    },&#xa;    new String [] {&#xa;        &quot;Nombre&quot;, &quot;Precio&quot;&#xa;    }&#xa;);"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
